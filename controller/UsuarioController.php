@@ -12,6 +12,11 @@ class UsuarioController{
         $usuario->save();
     }
 
+    public static function listar(){
+        $usuario = new Usuario();
+        return $usuario->listAll();
+    }
+
 }
 
 ?>

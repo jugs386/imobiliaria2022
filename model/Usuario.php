@@ -81,7 +81,28 @@ class Usuario extends Banco{
     }
 
     public function listAll(){
-
+         //cria um objeto do tipo conexao
+         $conexao = new Conexao();
+         //cria a conexao com o banco de dados
+         $conn = $conexao->getConection();
+         //cria query de seleção
+         $query = "SELECT * FROM usuario";
+         //Prepara a query para execução
+         $stmt = $conn->prepare($query);
+         //Cria um array para receber o resultado da seleção
+         $result = array();
+         //executa a query
+         if ($stmt->execute()) {
+             //o resultado da busca será retornado como um objeto da classe
+             while ($rs = $stmt->fetchObject(Usuario::class)) {
+                 //armazena esse objeto em uma posição do vetor
+                 $result[] = $rs;
+             }
+         }else{
+             $result = false;
+         }
+ 
+         return $result;
     }
 
 

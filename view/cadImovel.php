@@ -1,6 +1,9 @@
 <?php
-require_once '../head.php';
+ob_start();
+require_once 'head.php';
+require_once 'controller/ImovelController.php';
 ?>
+
 <div class="container">
         <form name="cadUsuario" id="cadUsuario" action="" method="post">
             <div class="card" style="top:40px">
@@ -11,18 +14,15 @@ require_once '../head.php';
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Descricao:</label>
-                    <input type="text" class="form-control col-sm-8" name="descricao" id="descricao" 
-                    value="" />
+                    <input type="text" class="form-control col-sm-8" name="descricao" id="descricao" value="" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Foto:</label>
-                    <input type="text" class="form-control col-sm-8" name="foto" id="foto" 
-                    value="" />
+                    <input type="text" class="form-control col-sm-8" name="foto" id="foto" value="" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Valor:</label>
-                    <input type="text" class="form-control col-sm-8" name="valor" id="valor"
-                    value="" />
+                    <input type="text" class="form-control col-sm-8" name="valor" id="valor" value="" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Tipo:</label>
@@ -35,21 +35,18 @@ require_once '../head.php';
                     </select>
                 </div>
                 <div class="card-footer">
-                    <input type="hidden" name="id" id="id" 
-                    value="" />
+                    <input type="hidden" name="id" id="id" value="" />
                     <input type="submit" class="btn btn-success" name="btnSalvar" id="btnSalvar">
                 </div>
             </div>
         </form>
     </div>
-
 <?php
 
     if(isset($_POST['btnSalvar'])){
-        require_once '../controller/ImovelController.php';
         call_user_func(array('ImovelController','salvar'));
+        header('Location: index.php?page=imovel&action=listar');
     }
-
-
-    require_once '../foot.php';
+    require_once 'foot.php';
+    ob_end_flush();
 ?>

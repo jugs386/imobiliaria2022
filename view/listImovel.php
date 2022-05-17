@@ -1,5 +1,7 @@
 <?php
-require_once '../head.php';
+require_once 'head.php';
+//importa o UsuarioController.php
+require_once 'controller/ImovelController.php';
 ?>
 <div class="container">
 
@@ -17,8 +19,7 @@ require_once '../head.php';
         </thead>
         <tbody>
             <?php
-            //importa o UsuarioController.php
-            require_once '../controller/ImovelController.php';
+            
             //Chama uma função PHP que permite informar a classe e o Método que será acionado
             $imoveis = call_user_func(array('ImovelController','listar'));
             //Verifica se houve algum retorno
@@ -32,8 +33,8 @@ require_once '../head.php';
                         <td><?php echo $imovel->getValor(); ?></td>
                         <td><?php echo $imovel->getTipo(); ?></td>
                         <td>
-                            <a href="" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="" class="btn btn-danger btn-sm">Excluir</a>
+                            <a href="index.php?page=imovel&action=editar&id=<?php echo $usuario->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="index.php?page=imovel&action=excluir&id=<?php echo $usuario->getId(); ?>" class="btn btn-danger btn-sm">Excluir</a>
                         </td>
                     </tr>
                     <?php
@@ -50,6 +51,6 @@ require_once '../head.php';
     </table>
 </div>
 <?php
-    require_once '../foot.php';
+    require_once 'foot.php';
 ?>
 

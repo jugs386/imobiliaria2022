@@ -1,10 +1,8 @@
 <?php 
-
+ob_start();
 if(isset($usuario) && !empty($usuario)){
   echo $usuario->getPermissao();
 }
-
-
 
 ?>
 <div class="container">
@@ -52,7 +50,8 @@ if(isset($usuario) && !empty($usuario)){
     if(isset($_POST['btnSalvar'])){
         require_once './controller/UsuarioController.php';
         call_user_func(array('UsuarioController','salvar'));
-        header('Location: index.php?action=listar');
+        header('Location: index.php?page=usuario&action=listar');
     }
 
+    ob_end_flush();
 ?>

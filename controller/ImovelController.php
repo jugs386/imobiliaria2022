@@ -1,6 +1,6 @@
 <?php
 
-require_once '../model/Imovel.php';
+require_once 'model/Imovel.php';
 
 class ImovelController{
     public static function salvar(){

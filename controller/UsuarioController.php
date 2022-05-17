@@ -24,6 +24,11 @@ class UsuarioController{
         return $usuario;
     }
 
+    public static function excluir($id){
+        $usuario = new Usuario();
+        $usuario->remove($id);
+    }
+
 }
 
 ?>

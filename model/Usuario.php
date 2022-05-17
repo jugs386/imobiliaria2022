@@ -78,6 +78,15 @@ class Usuario extends Banco{
     }
 
     public function remove($id){
+        $result = false;
+        $conexao = new Conexao();
+        $conn = $conexao->getConection();
+        $query = "delete from usuario where id = :id";
+        $stmt = $conn->prepare($query);
+        if($stmt->execute(array(':id' => $id))){
+            $result = true;
+        }
+        return $result;
 
     }
 

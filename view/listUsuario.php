@@ -26,7 +26,7 @@
                         <td><?php echo ($usuario->getPermissao() == 'C')?'Comum':'Administrador';?></td>
                         <td>
                             <a href="index.php?action=editar&id=<?php echo $usuario->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="" class="btn btn-danger btn-sm">Excluir</a>
+                            <a href="index.php?action=excluir&id=<?php echo $usuario->getId(); ?>" class="btn btn-danger btn-sm">Excluir</a>
                         </td>
                     </tr>
                     <?php

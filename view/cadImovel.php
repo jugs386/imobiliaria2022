@@ -46,7 +46,6 @@ require_once '../head.php';
 <?php
 
     if(isset($_POST['btnSalvar'])){
-        echo 'yep!';
         require_once '../controller/ImovelController.php';
         call_user_func(array('ImovelController','salvar'));
     }

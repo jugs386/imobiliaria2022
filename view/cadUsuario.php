@@ -1,5 +1,11 @@
-<?php
-require_once '../head.php';
+<?php 
+
+if(isset($usuario) && !empty($usuario)){
+  echo $usuario->getPermissao();
+}
+
+
+
 ?>
 <div class="container">
         <form name="cadUsuario" id="cadUsuario" action="" method="post">
@@ -12,29 +18,29 @@ require_once '../head.php';
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Login:</label>
                     <input type="text" class="form-control col-sm-8" name="login" id="login" 
-                    value="" />
+                    value="<?php echo isset($usuario)?$usuario->getLogin():''; ?>" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Senha:</label>
                     <input type="password" class="form-control col-sm-8" name="senha1" id="senha1" 
-                    value="" />
+                    value="<?php echo isset($usuario)?$usuario->getSenha():''; ?>" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Confirmação:</label>
                     <input type="password" class="form-control col-sm-8" name="senha2" id="senha2"
-                    value="" />
+                    value="<?php echo isset($usuario)?$usuario->getSenha():''; ?>" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Permissão:</label>
                     <select name="permissao" id="permissao" class="form-control col-sm-8">
                         <option value="0"></option>
-                        <option value="A">Administrador</option>
-                        <option value="C">Comum</option>
+                        <option value="A" <?php echo isset($usuario) && $usuario->getPermissao() == 'A'?'selected':''; ?>>Administrador</option>
+                        <option value="C" <?php echo isset($usuario) && $usuario->getPermissao() == 'C'?'selected':''; ?>>Comum</option>
                     </select>
                 </div>
                 <div class="card-footer">
                     <input type="hidden" name="id" id="id" 
-                    value="" />
+                    value="<?php echo isset($usuario)?$usuario->getId():''; ?>" />
                     <input type="submit" class="btn btn-success" name="btnSalvar" id="btnSalvar">
                 </div>
             </div>
@@ -43,12 +49,10 @@ require_once '../head.php';
 
 <?php
 
-    if(isset($_POST['btnCadastrar'])){
-
-        require_once '../controller/UsuarioController.php';
+    if(isset($_POST['btnSalvar'])){
+        require_once './controller/UsuarioController.php';
         call_user_func(array('UsuarioController','salvar'));
+        header('Location: index.php?action=listar');
     }
 
-
-    require_once '../foot.php';
 ?>

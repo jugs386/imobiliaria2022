@@ -1,6 +1,3 @@
-<?php
-require_once '../head.php';
-?>
 <div class="container">
 
 <h1>Usuários</h1>
@@ -16,7 +13,7 @@ require_once '../head.php';
         <tbody>
             <?php
             //importa o UsuarioController.php
-            require_once '../controller/UsuarioController.php';
+            require_once './controller/UsuarioController.php';
             //Chama uma função PHP que permite informar a classe e o Método que será acionado
             $usuarios = call_user_func(array('UsuarioController','listar'));
             //Verifica se houve algum retorno
@@ -28,7 +25,7 @@ require_once '../head.php';
                         <td><?php echo $usuario->getLogin(); ?></td>
                         <td><?php echo ($usuario->getPermissao() == 'C')?'Comum':'Administrador';?></td>
                         <td>
-                            <a href="" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="index.php?action=editar&id=<?php echo $usuario->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="" class="btn btn-danger btn-sm">Excluir</a>
                         </td>
                     </tr>
@@ -45,7 +42,3 @@ require_once '../head.php';
         </tbody>
     </table>
 </div>
-<?php
-    require_once '../foot.php';
-?>
-

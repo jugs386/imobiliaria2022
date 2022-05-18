@@ -1,6 +1,7 @@
 <?php
 require_once 'head.php';
 require_once 'controller/UsuarioController.php';
+require_once 'controller/ImovelController.php';
 
 require_once 'view/menu.php';
 if(isset($_GET['page'])){

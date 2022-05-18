@@ -30,11 +30,13 @@ require_once 'controller/ImovelController.php';
                         <!-- Como o retorno é um objeto, devemos chamar os get para mostrar o resultado -->
                         <td><?php echo $imovel->getDescricao(); ?></td>
                         <td><?php echo $imovel->getFoto(); ?></td>
+                        <td><?php echo ($imovel->getTipo() == 'C'?'Casa':
+                                            ($imovel->getTipo() == 'A'?'Apartamento':
+                                                ($imovel->getTipo() == 'S'?'Sobrado':'Chacara')));?></td>
                         <td><?php echo $imovel->getValor(); ?></td>
-                        <td><?php echo $imovel->getTipo(); ?></td>
                         <td>
-                            <a href="index.php?page=imovel&action=editar&id=<?php echo $usuario->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
-                            <a href="index.php?page=imovel&action=excluir&id=<?php echo $usuario->getId(); ?>" class="btn btn-danger btn-sm">Excluir</a>
+                            <a href="index.php?page=imovel&action=editar&id=<?php echo $imovel->getId(); ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="index.php?page=imovel&action=excluir&id=<?php echo $imovel->getId(); ?>" class="btn btn-danger btn-sm">Excluir</a>
                         </td>
                     </tr>
                     <?php

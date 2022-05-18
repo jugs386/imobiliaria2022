@@ -14,28 +14,28 @@ require_once 'controller/ImovelController.php';
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Descricao:</label>
-                    <input type="text" class="form-control col-sm-8" name="descricao" id="descricao" value="" />
+                    <input type="text" class="form-control col-sm-8" name="descricao" id="descricao" value="<?php echo isset($imovel)?$imovel->getDescricao():''; ?>" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Foto:</label>
-                    <input type="text" class="form-control col-sm-8" name="foto" id="foto" value="" />
+                    <input type="text" class="form-control col-sm-8" name="foto" id="foto" value="<?php echo isset($imovel)?$imovel->getFoto():''; ?>" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Valor:</label>
-                    <input type="text" class="form-control col-sm-8" name="valor" id="valor" value="" />
+                    <input type="text" class="form-control col-sm-8" name="valor" id="valor" value="<?php echo isset($imovel)?$imovel->getValor():''; ?>" />
                 </div>
                 <div class="form-group form-row">
                     <label class="col-sm-2 col-form-label text-right">Tipo:</label>
                     <select name="tipo" id="tipo" class="form-control col-sm-8">
                         <option value="0">**SELECIONE**</option>
-                        <option value="C">Casa Terrea</option>
-                        <option value="S">Sobrado</option>
-                        <option value="T">Terreno</option>
-                        <option value="H">Chacara</option>
+                        <option value="C" <?php echo isset($imovel) && $imovel->getTipo() == 'C'?'selected':'';  ?>>Casa Terrea</option>
+                        <option value="S" <?php echo isset($imovel) && $imovel->getTipo() == 'S'?'selected':'';  ?>>Sobrado</option>
+                        <option value="T" <?php echo isset($imovel) && $imovel->getTipo() == 'T'?'selected':'';  ?>>Terreno</option>
+                        <option value="H" <?php echo isset($imovel) && $imovel->getTipo() == 'H'?'selected':'';  ?>>Chacara</option>
                     </select>
                 </div>
                 <div class="card-footer">
-                    <input type="hidden" name="id" id="id" value="" />
+                    <input type="hidden" name="id" id="id" value="<?php echo isset($imovel)?$imovel->getId():''; ?>" />
                     <input type="submit" class="btn btn-success" name="btnSalvar" id="btnSalvar">
                 </div>
             </div>

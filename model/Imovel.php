@@ -64,29 +64,62 @@ class Imovel extends Banco{
     }
 
     public function save(){
+
+
         $result = false;
         $conexao = new Conexao();
-
-        $sql = "insert into imovel values (null, :descricao, :foto, :valor, :tipo)";
         if($conn = $conexao->getConection()){
-            $stmt = $conn->prepare($sql);
-            if($stmt->execute(array(':descricao'=> $this->descricao, 
+            if($this->id > 0){
+                //alteração
+                $sql = "update imovel set descricao = :descricao, foto = :foto, valor = :valor, tipo = :tipo where id = :id";
+                $stmt = $conn->prepare($sql);
+                if($stmt->execute(array(':descricao' => $this->descricao, ':foto' => $this->foto, ':valor' => $this->valor, ':tipo' => $this->tipo, ':id'=> $this->id))){
+                    $result = $stmt->rowCount();
+                }
+
+            }else{
+                //inserção
+                $sql = "insert into imovel values (null, :descricao, :foto, :valor, :tipo)";
+                    $stmt = $conn->prepare($sql);
+                    if($stmt->execute(array(':descricao'=> $this->descricao, 
                                     ':foto'=> $this->foto, 
                                     ':valor'=> $this->valor,
                                     ':tipo'=> $this->tipo
                                      ))){
                                          $result = $stmt->rowCount();
                                      }
+
+        }
+        return $result;
+    }
+}
+
+    public function remove($id){
+        $result = false;
+        $conexao = new Conexao();
+        $conn = $conexao->getConection();
+        $query = "delete from imovel where id = :id";
+        $stmt = $conn->prepare($query);
+        if($stmt->execute(array(':id' => $id))){
+            $result = true;
         }
         return $result;
     }
 
-    public function remove($id){
-
-    }
-
     public function find($id){
+        $conexao = new Conexao();
+        $conn = $conexao->getConection();
+        $query = "select * from imovel where id = :id";
+        $stmt = $conn->prepare($query);
+        if($stmt->execute(array(':id'=> $id))){
+            if($stmt->rowCount() > 0 ){
+                $result = $stmt->fetchObject(Imovel::class);
+            }else{
+                $result = false;
+            }
+        }
 
+        return $result;
     }
 
     public function count(){

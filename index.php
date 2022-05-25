@@ -1,8 +1,10 @@
 <?php
+session_start();
 require_once 'head.php';
 require_once 'controller/UsuarioController.php';
 require_once 'controller/ImovelController.php';
 
+if(isset($_SESSION['logado']) && $_SESSION['logado'] == true){
 require_once 'view/menu.php';
 if(isset($_GET['page'])){
 
@@ -46,8 +48,13 @@ if(isset($_GET['page'])){
         }
     }
 }
-
-
+}else{
+    if(isset($_GET['logar'])){
+        require_once 'view/login.php';
+    }else{
+        require_once 'principal.php';
+    }
+}
 require_once 'foot.php';
 
 ?>
